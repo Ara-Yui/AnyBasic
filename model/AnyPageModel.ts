@@ -1,4 +1,4 @@
-import { IPage } from "interface/IPage";
+import { IPage } from "../interface/IPage";
 import { AnyBaseModel } from "./AnyBaseModel";
 
 /**

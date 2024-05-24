@@ -1,5 +1,5 @@
-import { AnyDecoratorHelper } from "helper/AnyDecoratorHelper";
-import { ISearchConfig } from "interface/ISearchConfig";
+import { AnyDecoratorHelper } from "../helper/AnyDecoratorHelper";
+import { ISearchConfig } from "../interface/ISearchConfig";
 
 export const SEARCHCONFIG_METADATA_KEY = Symbol("searchconfig");
 
@@ -18,6 +18,11 @@ export const SEARCHCONFIG_METADATA_KEY = Symbol("searchconfig");
  */
 export function SearchConfig(config: ISearchConfig) {
   return function (target: any, propertyKey: string) {
-    AnyDecoratorHelper.defineMetadata(SEARCHCONFIG_METADATA_KEY, config, target, propertyKey);
+    AnyDecoratorHelper.defineMetadata(
+      SEARCHCONFIG_METADATA_KEY,
+      config,
+      target,
+      propertyKey
+    );
   };
 }

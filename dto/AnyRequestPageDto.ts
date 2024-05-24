@@ -1,5 +1,5 @@
 import { AnyRequestDto } from "./AnyRequestDto";
-import { AnyPageModel } from "model/AnyPageModel";
+import { AnyPageModel } from "../model/AnyPageModel";
 
 /**
  * # 分页请求数据传输对象
