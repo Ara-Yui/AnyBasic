@@ -1,11 +1,11 @@
-import { TBaseType } from "type/TBaseType";
-import { EToAliasType } from "enum/EToAliasType";
-import { IFieldConfig } from "interface/IFieldConfig";
-import { IEntityConfig } from "interface/IEntityConfig";
-import { AnyDecoratorHelper } from "helper/AnyDecoratorHelper";
-import { AnyClassTransformHelper } from "helper/AnyClassTransformHelper";
-import { FIELDCONFIG_METADATA_KEY } from "decorator/FieldConfig";
-import { ENTITYCONFIG_METADATA_KEY } from "decorator/EntityConfig";
+import { TBaseType } from "../type/TBaseType";
+import { EToAliasType } from "../enum/EToAliasType";
+import { IFieldConfig } from "../interface/IFieldConfig";
+import { IEntityConfig } from "../interface/IEntityConfig";
+import { AnyDecoratorHelper } from "../helper/AnyDecoratorHelper";
+import { AnyClassTransformHelper } from "../helper/AnyClassTransformHelper";
+import { FIELDCONFIG_METADATA_KEY } from "../decorator/FieldConfig";
+import { ENTITYCONFIG_METADATA_KEY } from "../decorator/EntityConfig";
 
 /**
  * # 抽象数据模型基类
@@ -28,7 +28,7 @@ export abstract class AnyBaseModel {
    */
   expose(...fields: string[]): TBaseType {
     const result: TBaseType = {};
-    fields.forEach(field => {
+    fields.forEach((field) => {
       result[field] = this[field];
     });
     return result;
@@ -42,7 +42,7 @@ export abstract class AnyBaseModel {
   exclude(...fields: string[]): TBaseType {
     const result: TBaseType = {};
     const keys = Object.keys(this);
-    keys.forEach(key => {
+    keys.forEach((key) => {
       if (!fields.includes(key)) {
         result[key] = this[key];
       }
@@ -57,7 +57,10 @@ export abstract class AnyBaseModel {
    * @description 该方法会将来源数据对象中的所有字段赋值到当前类的实例中
    */
   fromObject(sourceData: TBaseType): this {
-    return AnyClassTransformHelper.toInstance(sourceData, this.constructor as any);
+    return AnyClassTransformHelper.toInstance(
+      sourceData,
+      this.constructor as any
+    );
   }
 
   /**
@@ -67,7 +70,10 @@ export abstract class AnyBaseModel {
    * @description 该方法会将来源数据对象数组中的所有对象转换为当前类的实例
    */
   fromObjectArray(sourceDataList: TBaseType[]): this[] {
-    return AnyClassTransformHelper.toInstanceArray(sourceDataList, this.constructor as any);
+    return AnyClassTransformHelper.toInstanceArray(
+      sourceDataList,
+      this.constructor as any
+    );
   }
 
   /**
@@ -81,12 +87,17 @@ export abstract class AnyBaseModel {
    * ```
    */
   public static getFieldName(field: string): string {
-    const fieldConfig = AnyDecoratorHelper.getMetadataByField(FIELDCONFIG_METADATA_KEY, this, field) as IFieldConfig || null;
+    const fieldConfig =
+      (AnyDecoratorHelper.getMetadataByField(
+        FIELDCONFIG_METADATA_KEY,
+        this,
+        field
+      ) as IFieldConfig) || null;
     if (fieldConfig && fieldConfig.name) {
       return fieldConfig.name;
     }
     let prototype = Reflect.getPrototypeOf(this);
-    if (prototype && prototype.constructor.name !== 'AnyBaseModel') {
+    if (prototype && prototype.constructor.name !== "AnyBaseModel") {
       return this.getFieldName.call(prototype, field);
     }
     return field;
@@ -97,11 +108,14 @@ export abstract class AnyBaseModel {
    * @returns 当前类的配置名称
    */
   public static getClassName(): string {
-    const entityConfig = AnyDecoratorHelper.getMetadataByField(ENTITYCONFIG_METADATA_KEY, this) as IEntityConfig || null;
+    const entityConfig =
+      (AnyDecoratorHelper.getMetadataByField(
+        ENTITYCONFIG_METADATA_KEY,
+        this
+      ) as IEntityConfig) || null;
     if (entityConfig && entityConfig.name) {
       return entityConfig.name;
     }
     return this.name;
   }
-
 }

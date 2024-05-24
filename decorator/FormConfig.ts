@@ -1,5 +1,5 @@
-import { AnyDecoratorHelper } from "helper/AnyDecoratorHelper";
-import { IFormConfig } from "interface/IFormConfig";
+import { AnyDecoratorHelper } from "../helper/AnyDecoratorHelper";
+import { IFormConfig } from "../interface/IFormConfig";
 
 export const FORMCONFIG_METADATA_KEY = Symbol("formconfig");
 
@@ -18,6 +18,11 @@ export const FORMCONFIG_METADATA_KEY = Symbol("formconfig");
  */
 export function FormConfig(config: IFormConfig) {
   return function (target: any, propertyKey: string) {
-    AnyDecoratorHelper.defineMetadata(FORMCONFIG_METADATA_KEY, config, target, propertyKey);
+    AnyDecoratorHelper.defineMetadata(
+      FORMCONFIG_METADATA_KEY,
+      config,
+      target,
+      propertyKey
+    );
   };
 }

@@ -1,5 +1,5 @@
-import { AnyBaseModel } from "model/AnyBaseModel";
-import { TBaseType } from "type/TBaseType";
+import { AnyBaseModel } from "../model/AnyBaseModel";
+import { TBaseType } from "../type/TBaseType";
 
 /**
  * # 任意请求数据传输对象

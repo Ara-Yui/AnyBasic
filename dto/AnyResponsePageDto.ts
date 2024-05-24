@@ -1,7 +1,7 @@
-import { EHttpCode } from "enum/EHttpCode";
-import { IPage } from "interface/IPage";
-import { AnyBaseModel } from "model/AnyBaseModel";
-import { AnyPageModel } from "model/AnyPageModel";
+import { EHttpCode } from "../enum/EHttpCode";
+import { IPage } from "../interface/IPage";
+import { AnyBaseModel } from "../model/AnyBaseModel";
+import { AnyPageModel } from "../model/AnyPageModel";
 
 export class AnyResponsePageDto<T extends AnyBaseModel> extends AnyPageModel {
   /**
@@ -18,5 +18,4 @@ export class AnyResponsePageDto<T extends AnyBaseModel> extends AnyPageModel {
    * # 响应信息
    */
   message: string = "";
-
 }

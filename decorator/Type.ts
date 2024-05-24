@@ -1,7 +1,7 @@
-import { AnyDecoratorHelper } from "helper/AnyDecoratorHelper";
-import { ClassConstructor } from "type/ClassConstructor";
+import { AnyDecoratorHelper } from "../helper/AnyDecoratorHelper";
+import { ClassConstructor } from "../type/ClassConstructor";
 
-export const TYPE_METADATA_KEY = Symbol('type');
+export const TYPE_METADATA_KEY = Symbol("type");
 
 /**
  * # 类型装饰器
@@ -17,6 +17,11 @@ export const TYPE_METADATA_KEY = Symbol('type');
  */
 export function Type(type: ClassConstructor<any>) {
   return function (target: any, propertyKey: string) {
-    AnyDecoratorHelper.defineMetadata(TYPE_METADATA_KEY, type, target, propertyKey);
+    AnyDecoratorHelper.defineMetadata(
+      TYPE_METADATA_KEY,
+      type,
+      target,
+      propertyKey
+    );
   };
 }

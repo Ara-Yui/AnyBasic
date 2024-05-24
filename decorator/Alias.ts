@@ -1,7 +1,7 @@
-import { AnyDecoratorHelper } from "helper/AnyDecoratorHelper";
-import { IAlias } from "interface/IAlias";
+import { AnyDecoratorHelper } from "../helper/AnyDecoratorHelper";
+import { IAlias } from "../interface/IAlias";
 
-export const ALIAS_METADATA_KEY = Symbol('alias');
+export const ALIAS_METADATA_KEY = Symbol("alias");
 
 /**
  * # 别名装饰器
@@ -23,15 +23,22 @@ export const ALIAS_METADATA_KEY = Symbol('alias');
  * @example
  * ```ts
  * class User {
- *  -@Alias('name') 
+ *  -@Alias('name')
  *  name: string;
  * }
  * ```
  */
-export function Alias(alias: string|IAlias) {
+export function Alias(alias: string | IAlias) {
   return function (target: any, propertyKey: string) {
-    let aliasConfig: IAlias
-    typeof alias === 'string' ? aliasConfig = { alias } : aliasConfig = alias;
-    AnyDecoratorHelper.defineMetadata(ALIAS_METADATA_KEY, aliasConfig, target, propertyKey);
+    let aliasConfig: IAlias;
+    typeof alias === "string"
+      ? (aliasConfig = { alias })
+      : (aliasConfig = alias);
+    AnyDecoratorHelper.defineMetadata(
+      ALIAS_METADATA_KEY,
+      aliasConfig,
+      target,
+      propertyKey
+    );
   };
 }

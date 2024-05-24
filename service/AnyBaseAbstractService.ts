@@ -1,75 +1,86 @@
-import { AnyRequestPageDto } from "dto/AnyRequestPageDto";
-import { AnyBaseEntity } from "entity/AnyBaseEntity";
-import { EToAliasType } from "enum/EToAliasType";
-import { AnyClassTransformHelper } from "helper/AnyClassTransformHelper";
-import { AnyFetchHttp } from "http/AnyFetchHttp";
-import { ClassConstructor } from "type/ClassConstructor";
+import { AnyRequestPageDto } from "../dto/AnyRequestPageDto";
+import { AnyBaseEntity } from "../entity/AnyBaseEntity";
+import { EToAliasType } from "../enum/EToAliasType";
+import { AnyClassTransformHelper } from "../helper/AnyClassTransformHelper";
+import { AnyFetchHttp } from "../http/AnyFetchHttp";
+import { ClassConstructor } from "../type/ClassConstructor";
 
 /**
  * # 与后端约定的获取分页数据的标准url
  */
-const GET_PAGE_DATA_URL = 'page'
+const GET_PAGE_DATA_URL = "page";
 
 /**
  * # 与后端约定的获取所有数据的标准url
  */
-const GET_ALL_DATA_URL = 'all'
+const GET_ALL_DATA_URL = "all";
 
 /**
  * # 与后端约定的获取详情的标准url
  */
-const GET_DETAIL_URL = 'detail'
+const GET_DETAIL_URL = "detail";
 
 /**
  * # 与后端约定的新增的标准url
  */
-const ADD_URL = 'add'
+const ADD_URL = "add";
 
 /**
  * # 与后端约定的编辑的标准url
  */
-const EDIT_URL = 'edit'
+const EDIT_URL = "edit";
 
 /**
  * # 与后端约定的删除的标准url
  */
-const DELETE_URL = 'delete'
+const DELETE_URL = "delete";
 
 /**
  * # 抽象服务基类
  */
-export abstract class AnyBaseAbstractService<T extends AnyBaseEntity> extends AnyFetchHttp {
+export abstract class AnyBaseAbstractService<
+  T extends AnyBaseEntity
+> extends AnyFetchHttp {
   /**
    * # 基础url
    */
-  baseUrl!: string
+  baseUrl!: string;
 
   /**
    * # 获取分页数据
    */
-  async getPage(request: AnyRequestPageDto<T>, classz: ClassConstructor<AnyBaseEntity>) {
-    const res = await this.post(`${this.baseUrl}/${GET_PAGE_DATA_URL}`, request.toAliasJson(EToAliasType.Search))
-    const result = AnyClassTransformHelper.toInstance(res, classz)
-    return result
+  async getPage(
+    request: AnyRequestPageDto<T>,
+    classz: ClassConstructor<AnyBaseEntity>
+  ) {
+    const res = await this.post(
+      `${this.baseUrl}/${GET_PAGE_DATA_URL}`,
+      request.toAliasJson(EToAliasType.Search)
+    );
+    const result = AnyClassTransformHelper.toInstance(res, classz);
+    return result;
   }
 
   /**
    * # 获取所有数据
    */
   async getAll(classz: ClassConstructor<AnyBaseEntity>) {
-    const res = await this.post(`${this.baseUrl}/${GET_ALL_DATA_URL}`)
-    const result = AnyClassTransformHelper.toInstance(res, classz)
-    return result
+    const res = await this.post(`${this.baseUrl}/${GET_ALL_DATA_URL}`);
+    const result = AnyClassTransformHelper.toInstance(res, classz);
+    return result;
   }
 
   /**
    * # 获取详情
    * @param id
    */
-  async getDetail(id: string | number, classz: ClassConstructor<AnyBaseEntity>) {
-    const res = await this.post(`${this.baseUrl}/${GET_DETAIL_URL}`, { id })
-    const result = AnyClassTransformHelper.toInstance(res, classz)
-    return result
+  async getDetail(
+    id: string | number,
+    classz: ClassConstructor<AnyBaseEntity>
+  ) {
+    const res = await this.post(`${this.baseUrl}/${GET_DETAIL_URL}`, { id });
+    const result = AnyClassTransformHelper.toInstance(res, classz);
+    return result;
   }
 
   /**
@@ -77,8 +88,11 @@ export abstract class AnyBaseAbstractService<T extends AnyBaseEntity> extends An
    * @param data
    */
   async add(data: T) {
-    await this.post(`${this.baseUrl}/${ADD_URL}`, data.toAliasJson(EToAliasType.Form))
-    return
+    await this.post(
+      `${this.baseUrl}/${ADD_URL}`,
+      data.toAliasJson(EToAliasType.Form)
+    );
+    return;
   }
 
   /**
@@ -86,8 +100,11 @@ export abstract class AnyBaseAbstractService<T extends AnyBaseEntity> extends An
    * @param data
    */
   async edit(data: T) {
-    await this.post(`${this.baseUrl}/${EDIT_URL}`, data.toAliasJson(EToAliasType.Form))
-    return
+    await this.post(
+      `${this.baseUrl}/${EDIT_URL}`,
+      data.toAliasJson(EToAliasType.Form)
+    );
+    return;
   }
 
   /**
@@ -97,9 +114,9 @@ export abstract class AnyBaseAbstractService<T extends AnyBaseEntity> extends An
    */
   save(data: T) {
     if (data.id) {
-      return this.edit(data)
+      return this.edit(data);
     } else {
-      return this.add(data)
+      return this.add(data);
     }
   }
 
@@ -109,8 +126,8 @@ export abstract class AnyBaseAbstractService<T extends AnyBaseEntity> extends An
    * @private
    */
   async #deleteById(id: string | number) {
-    await this.post(`${this.baseUrl}/${DELETE_URL}`, { id: [id] })
-    return
+    await this.post(`${this.baseUrl}/${DELETE_URL}`, { id: [id] });
+    return;
   }
 
   /**
@@ -119,8 +136,8 @@ export abstract class AnyBaseAbstractService<T extends AnyBaseEntity> extends An
    * @private
    */
   async #deleteByIds(ids: (string | number)[]) {
-    await this.post(`${this.baseUrl}/${DELETE_URL}`, { id: ids })
-    return
+    await this.post(`${this.baseUrl}/${DELETE_URL}`, { id: ids });
+    return;
   }
 
   /**
@@ -130,10 +147,9 @@ export abstract class AnyBaseAbstractService<T extends AnyBaseEntity> extends An
    */
   async deleteBy(id: string | number | (string | number)[]) {
     if (Array.isArray(id)) {
-      return this.#deleteByIds(id)
+      return this.#deleteByIds(id);
     } else {
-      return this.#deleteById(id)
+      return this.#deleteById(id);
     }
   }
-
 }

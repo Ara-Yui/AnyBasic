@@ -1,7 +1,7 @@
-import { AnyDecoratorHelper } from "helper/AnyDecoratorHelper";
-import { IEntityConfig } from "interface/IEntityConfig";
+import { AnyDecoratorHelper } from "../helper/AnyDecoratorHelper";
+import { IEntityConfig } from "../interface/IEntityConfig";
 
-export const ENTITYCONFIG_METADATA_KEY = Symbol('entityConfig');
+export const ENTITYCONFIG_METADATA_KEY = Symbol("entityConfig");
 
 /**
  * # 实体配置装饰器
@@ -21,6 +21,10 @@ export const ENTITYCONFIG_METADATA_KEY = Symbol('entityConfig');
  */
 export function EntityConfig(config: IEntityConfig) {
   return function (target: any) {
-    AnyDecoratorHelper.defineMetadata(ENTITYCONFIG_METADATA_KEY, config, target);
+    AnyDecoratorHelper.defineMetadata(
+      ENTITYCONFIG_METADATA_KEY,
+      config,
+      target
+    );
   };
 }

@@ -1,5 +1,5 @@
-import { AnyDecoratorHelper } from "helper/AnyDecoratorHelper";
-import { ITableConfig } from "interface/ITableConfig";
+import { AnyDecoratorHelper } from "../helper/AnyDecoratorHelper";
+import { ITableConfig } from "../interface/ITableConfig";
 
 export const TABLECONFIG_METADATA_KEY = Symbol("tableconfig");
 
@@ -18,6 +18,11 @@ export const TABLECONFIG_METADATA_KEY = Symbol("tableconfig");
  */
 export function TableConfig(config: ITableConfig) {
   return function (target: any, propertyKey: string) {
-    AnyDecoratorHelper.defineMetadata(TABLECONFIG_METADATA_KEY, config, target, propertyKey);
+    AnyDecoratorHelper.defineMetadata(
+      TABLECONFIG_METADATA_KEY,
+      config,
+      target,
+      propertyKey
+    );
   };
 }

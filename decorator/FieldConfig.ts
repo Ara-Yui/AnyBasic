@@ -1,5 +1,5 @@
-import { AnyDecoratorHelper } from "helper/AnyDecoratorHelper";
-import { IFieldConfig } from "interface/IFieldConfig";
+import { AnyDecoratorHelper } from "../helper/AnyDecoratorHelper";
+import { IFieldConfig } from "../interface/IFieldConfig";
 
 export const FIELDCONFIG_METADATA_KEY = Symbol("fieldConfig");
 
@@ -21,6 +21,11 @@ export const FIELDCONFIG_METADATA_KEY = Symbol("fieldConfig");
  */
 export function FieldConfig(config: IFieldConfig) {
   return function (target: any, propertyKey: string) {
-    AnyDecoratorHelper.defineMetadata(FIELDCONFIG_METADATA_KEY, config, target, propertyKey);
+    AnyDecoratorHelper.defineMetadata(
+      FIELDCONFIG_METADATA_KEY,
+      config,
+      target,
+      propertyKey
+    );
   };
 }

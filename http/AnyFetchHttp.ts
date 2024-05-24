@@ -1,4 +1,4 @@
-import { TBaseType } from "type/TBaseType";
+import { TBaseType } from "../type/TBaseType";
 
 /**
  * # fetch请求类
@@ -30,7 +30,7 @@ export class AnyFetchHttp {
   constructor(loading?: boolean) {
     this.loading = loading || false;
     this.headers = {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     };
   }
 
@@ -40,10 +40,14 @@ export class AnyFetchHttp {
    * @param method 请求方法
    * @param params 请求参数
    */
-  private request(url: string, method: string, params?: any):Promise<TBaseType> {
+  private request(
+    url: string,
+    method: string,
+    params?: any
+  ): Promise<TBaseType> {
     return new Promise((resolve, reject) => {
       if (this.loading) {
-        reject('请求正在进行中，请稍后再试');
+        reject("请求正在进行中，请稍后再试");
       }
       this.loading = true;
 
@@ -54,20 +58,23 @@ export class AnyFetchHttp {
         method,
         body: JSON.stringify(params),
         headers: this.headers,
-        signal: this.controller.signal
-      }).then(res => {
-        this.loading = false;
-        if (res.ok) {
-          return res.json();
-        } else {
-          reject(res.statusText);
-        }
-      }).then(res => {
-        resolve(res);
-      }).catch(err => {
-        this.errorHandler(err);
-        reject(err);
-      });
+        signal: this.controller.signal,
+      })
+        .then((res) => {
+          this.loading = false;
+          if (res.ok) {
+            return res.json();
+          } else {
+            reject(res.statusText);
+          }
+        })
+        .then((res) => {
+          resolve(res);
+        })
+        .catch((err) => {
+          this.errorHandler(err);
+          reject(err);
+        });
     });
   }
 
@@ -103,7 +110,7 @@ export class AnyFetchHttp {
    * ```
    */
   async get(url: string, params?: any) {
-    return await this.request(url, 'GET', params);
+    return await this.request(url, "GET", params);
   }
 
   /**
@@ -117,7 +124,7 @@ export class AnyFetchHttp {
    * ```
    */
   async post(url: string, params?: any) {
-    return await this.request(url, 'POST', params);
+    return await this.request(url, "POST", params);
   }
 
   /**
@@ -131,7 +138,7 @@ export class AnyFetchHttp {
    * ```
    */
   async put(url: string, params?: any) {
-    return await this.request(url, 'PUT', params);
+    return await this.request(url, "PUT", params);
   }
 
   /**
@@ -145,7 +152,7 @@ export class AnyFetchHttp {
    * ```
    */
   async delete(url: string, params?: any) {
-    return await this.request(url, 'DELETE', params);
+    return await this.request(url, "DELETE", params);
   }
 
   /**
@@ -160,7 +167,7 @@ export class AnyFetchHttp {
   setHeaders(headers: TBaseType) {
     this.headers = {
       ...this.headers,
-      ...headers
+      ...headers,
     };
     return this;
   }
@@ -219,5 +226,4 @@ export class AnyFetchHttp {
     this.controller.abort();
     return this;
   }
-
 }
