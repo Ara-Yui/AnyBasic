@@ -1,9 +1,9 @@
-import { AnyClassTransformHelper } from "helper/AnyClassTransformHelper"
-import { AnyDecoratorHelper } from "helper/AnyDecoratorHelper"
-import { AnyClipboardHelper } from "helper/AnyClipboardHelper"
-import { AnyDateTimeHelper } from "helper/AnyDateTimeHelper"
-import { AnyDictionaryHelper } from "helper/AnyDictionaryHelper"
-import { AnyValidatorHelper } from "helper/AnyValidatorHelper"
+import { AnyClassTransformHelper } from "../helper/AnyClassTransformHelper";
+import { AnyDecoratorHelper } from "../helper/AnyDecoratorHelper";
+import { AnyClipboardHelper } from "../helper/AnyClipboardHelper";
+import { AnyDateTimeHelper } from "../helper/AnyDateTimeHelper";
+import { AnyDictionaryHelper } from "../helper/AnyDictionaryHelper";
+import { AnyValidatorHelper } from "../helper/AnyValidatorHelper";
 
 /**
  * @module AnyHelper
@@ -15,5 +15,5 @@ export const AnyHelper = {
   AnyClipboardHelper,
   AnyDateTimeHelper,
   AnyDictionaryHelper,
-  AnyValidatorHelper
-}
+  AnyValidatorHelper,
+};

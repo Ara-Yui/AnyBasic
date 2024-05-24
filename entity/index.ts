@@ -1,7 +1,7 @@
-import { AnyBaseEntity } from "entity/AnyBaseEntity"
+import { AnyBaseEntity } from "../entity/AnyBaseEntity";
 
 /**
  * @module entity
  * @description 实体基类
  */
-export const AnyEntity = { AnyBaseEntity }
+export const AnyEntity = { AnyBaseEntity };

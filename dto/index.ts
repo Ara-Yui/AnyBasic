@@ -1,6 +1,6 @@
-import { AnyRequestDto } from "dto/AnyRequestDto"
-import { AnyRequestPageDto } from "dto/AnyRequestPageDto"
-import { AnyResponsePageDto } from "dto/AnyResponsePageDto"
+import { AnyRequestDto } from "../dto/AnyRequestDto";
+import { AnyRequestPageDto } from "../dto/AnyRequestPageDto";
+import { AnyResponsePageDto } from "../dto/AnyResponsePageDto";
 
 /**
  * @module dto
@@ -9,5 +9,5 @@ import { AnyResponsePageDto } from "dto/AnyResponsePageDto"
 export const AnyDto = {
   AnyRequestDto,
   AnyRequestPageDto,
-  AnyResponsePageDto
-}
+  AnyResponsePageDto,
+};
